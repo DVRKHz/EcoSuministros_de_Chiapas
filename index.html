@@ -1,190 +1,525 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoSuministros - Portal B2B</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSuministros de Chiapas | B2B</title>
+    <meta
+      name="description"
+      content="EcoSuministros de Chiapas ofrece soluciones ecológicas y productos de limpieza para hoteles, negocios y establecimientos mayoristas en Chiapas."
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .product-card:hover { transform: translateY(-5px); transition: all 0.3s; }
-        .cart-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
-    </style>
-</head>
-<body class="bg-gray-50 font-sans">
+      html {
+        scroll-behavior: smooth;
+      }
 
-    <!-- Navegación -->
-    <nav class="bg-emerald-700 text-white p-4 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-white p-1 rounded-full">
-                    <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
-                </div>
-                <h1 class="text-xl font-bold tracking-tight uppercase">EcoSuministros <span class="text-emerald-200">B2B</span></h1>
-            </div>
-            
-            <div class="hidden md:flex gap-6 items-center">
-                <a href="#" class="hover:text-emerald-200">Inicio</a>
-                <a href="#" class="hover:text-emerald-200">Catálogo</a>
-                <a href="#" class="hover:text-emerald-200">Mis Créditos</a>
-                <div class="relative cursor-pointer" onclick="toggleCart()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span id="cart-count" class="cart-badge">0</span>
-                </div>
-                <div class="flex items-center gap-2 bg-emerald-800 px-3 py-1 rounded">
-                    <span class="text-xs">Hotel Chiapas Plaza</span>
-                    <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center font-bold">H</div>
-                </div>
-            </div>
+      body {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+      }
+
+      .product-card {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 35px rgba(15, 118, 110, 0.12);
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: 9999px;
+        background: #ef4444;
+        color: white;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .section-title {
+        letter-spacing: -0.04em;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased">
+    <nav class="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 shadow-sm backdrop-blur">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-600 text-xl font-black text-white shadow-md shadow-emerald-200">
+            E
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">Chiapas</p>
+            <h1 class="text-lg font-extrabold text-slate-900">EcoSuministros</h1>
+          </div>
         </div>
+
+        <div class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+          <a href="#inicio" class="transition hover:text-emerald-700">Inicio</a>
+          <a href="#catalogo" class="transition hover:text-emerald-700">Catálogo</a>
+          <a href="#nosotros" class="transition hover:text-emerald-700">Nosotros</a>
+          <a href="#beneficios" class="transition hover:text-emerald-700">Beneficios</a>
+          <a href="#contacto" class="transition hover:text-emerald-700">Contacto</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button class="hidden rounded-full border border-emerald-200 px-4 py-2 text-sm font-semibold text-emerald-700 sm:inline-flex hover:bg-emerald-50">
+            Mis créditos
+          </button>
+
+          <button
+            onclick="toggleCart()"
+            aria-label="Abrir carrito"
+            class="relative inline-flex items-center justify-center rounded-full bg-emerald-600 p-3 text-white shadow-lg shadow-emerald-200 transition hover:bg-emerald-700"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.2 6m8.2-6H7m8.2 0l1.2 6M9 19.5a.5.5 0 100 1 .5.5 0 000-1zm7 0a.5.5 0 100 1 .5.5 0 000-1z"/>
+            </svg>
+            <span id="cart-count" class="cart-badge">0</span>
+          </button>
+        </div>
+      </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-emerald-600 text-white py-12 px-4 text-center">
-        <h2 class="text-3xl md:text-5xl font-bold mb-4">Suministros Bio para tu Negocio</h2>
-        <p class="text-emerald-100 max-w-2xl mx-auto">Precios mayoristas, gestión de facturación inmediata y entrega en 24 horas para todo el estado de Chiapas.</p>
+    <header id="inicio" class="relative overflow-hidden bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-700 text-white">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute -left-20 top-10 h-72 w-72 rounded-full bg-emerald-300 blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-teal-200 blur-3xl"></div>
+      </div>
+
+      <div class="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-24">
+        <div class="flex flex-col justify-center">
+          <p class="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-50">
+            Soluciones ecológicas para negocios
+          </p>
+          <h2 class="section-title max-w-xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+            Suministros sostenibles para crecer con confianza.
+          </h2>
+          <p class="mt-6 max-w-xl text-base text-emerald-50/90 sm:text-lg">
+            Ofrecemos productos de limpieza, higiene y soluciones ecoamigables para hoteles, restaurantes, oficinas y negocios en todo Chiapas con entregas rápidas y atención B2B especializada.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="#catalogo" class="rounded-full bg-white px-6 py-3 text-sm font-bold text-emerald-700 shadow-lg shadow-emerald-900/10 transition hover:bg-emerald-50">
+              Ver catálogo
+            </a>
+            <a href="#contacto" class="rounded-full border border-white/30 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+              Solicitar cotización
+            </a>
+          </div>
+
+          <div class="mt-10 grid max-w-lg grid-cols-3 gap-4 text-left">
+            <div>
+              <p class="text-3xl font-black">24h</p>
+              <p class="text-sm text-emerald-100">Entrega express</p>
+            </div>
+            <div>
+              <p class="text-3xl font-black">+500</p>
+              <p class="text-sm text-emerald-100">Clientes activos</p>
+            </div>
+            <div>
+              <p class="text-3xl font-black">98%</p>
+              <p class="text-sm text-emerald-100">Satisfacción</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="glass rounded-[2rem] border border-white/20 p-5 shadow-2xl shadow-emerald-950/20">
+            <div class="rounded-[1.5rem] bg-white p-5 text-slate-800 shadow-xl">
+              <div class="mb-5 flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Cuenta empresarial</p>
+                  <h3 class="mt-1 text-2xl font-black text-slate-900">Hotel Chiapas Plaza</h3>
+                </div>
+                <div class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">Activo</div>
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-2xl bg-slate-50 p-4">
+                  <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Crédito disponible</p>
+                  <p class="mt-3 text-3xl font-black text-emerald-700">$45,000</p>
+                </div>
+                <div class="rounded-2xl bg-emerald-50 p-4">
+                  <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Pedido del mes</p>
+                  <p class="mt-3 text-3xl font-black text-emerald-700">$18,700</p>
+                </div>
+              </div>
+
+              <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div class="mb-3 flex items-center justify-between">
+                  <p class="text-sm font-bold text-slate-700">Productos más comprados</p>
+                  <span class="text-xs font-semibold text-slate-500">Este mes</span>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm">
+                    <span class="text-sm font-medium text-slate-700">Bio-Clean Pro</span>
+                    <span class="text-sm font-bold text-emerald-600">48</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm">
+                    <span class="text-sm font-medium text-slate-700">Citrus-Shield</span>
+                    <span class="text-sm font-bold text-emerald-600">31</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm">
+                    <span class="text-sm font-medium text-slate-700">Kit Sanitario</span>
+                    <span class="text-sm font-bold text-emerald-600">22</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="container mx-auto p-6 flex flex-col md:flex-row gap-8">
-        
-        <!-- Filtros Lateral -->
-        <aside class="w-full md:w-64 space-y-6">
-            <div class="bg-white p-4 rounded-lg shadow-sm border">
-                <h3 class="font-bold border-b pb-2 mb-4">Categorías</h3>
-                <ul class="space-y-2 text-gray-600">
-                    <li class="flex items-center gap-2"><input type="checkbox"> Desinfectantes</li>
-                    <li class="flex items-center gap-2"><input type="checkbox"> Detergentes Bio</li>
-                    <li class="flex items-center gap-2"><input type="checkbox"> Aromatizantes</li>
-                    <li class="flex items-center gap-2"><input type="checkbox"> Accesorios Eco</li>
-                </ul>
-            </div>
-            
-            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-                <h3 class="font-bold text-emerald-800 mb-2">Estado de Cuenta</h3>
-                <p class="text-sm text-emerald-700">Crédito Disponible: <br><span class="text-lg font-bold">$45,000.00</span></p>
-                <button class="mt-2 text-xs bg-emerald-700 text-white px-2 py-1 rounded">Pagar Facturas</button>
-            </div>
-        </aside>
+    <main>
+      <section id="beneficios" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-emerald-600">¿Por qué elegirnos?</p>
+          <h3 class="section-title text-3xl font-black text-slate-900 sm:text-4xl">Soluciones prácticas para tu operación</h3>
+        </div>
 
-        <!-- Catálogo de Productos -->
-        <section class="flex-1">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-800">Catálogo Mayorista</h3>
-                <select class="bg-white border rounded p-2 text-sm">
-                    <option>Ordenar por: Relevancia</option>
-                    <option>Precio: Menor a Mayor</option>
-                </select>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
             </div>
+            <h4 class="text-xl font-bold text-slate-900">Entrega ágil</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Despachos rápidos y confiables en todo Chiapas para minimizar tiempos de operación.</p>
+          </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="catalog">
-                <!-- Producto 1 -->
-                <div class="bg-white p-4 rounded-xl shadow-sm border product-card">
-                    <div class="w-full h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center text-gray-400">
-                        [Imagen: Detergente Bio 20L]
-                    </div>
-                    <h4 class="font-bold text-lg">Bio-Clean Pro (20L)</h4>
-                    <p class="text-xs text-gray-500 mb-2">ID: SKU-9921</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <div>
-                            <span class="text-sm text-gray-400 line-through">$1,200</span>
-                            <p class="text-xl font-bold text-emerald-700">$950.00</p>
-                            <p class="text-[10px] text-gray-500">Precio especial B2B</p>
-                        </div>
-                        <button onclick="addToCart('Bio-Clean Pro')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        </button>
-                    </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5v-9zM12 3v18M4 7.5l8 4.5 8-4.5"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold text-slate-900">Productos premium</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Formulas de limpieza eficientes, eco compatibles y orientados a resultados reales.</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold text-slate-900">Atención B2B</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Consultoría, crédito comercial y seguimiento personalizado para tu negocio.</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 7h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold text-slate-900">Control y trazabilidad</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Pedidos, seguimiento y facturación con un flujo claro para tu equipo administrativo.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="nosotros" class="bg-white py-20">
+        <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <div class="flex items-center justify-center">
+            <div class="relative w-full max-w-xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-600 to-teal-600 p-6 shadow-2xl shadow-emerald-200">
+              <div class="rounded-[1.5rem] bg-white/10 p-6 text-white backdrop-blur-sm">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-100">EcoSuministros</p>
+                <h3 class="mt-4 text-3xl font-black leading-tight">Suministros con impacto positivo para negocios responsables.</h3>
+                <p class="mt-5 text-base text-emerald-50/90">
+                  Ayudamos a establecimientos, hoteles y empresas de Chiapas a operar con productos más seguros, eficientes y alineados con una visión sostenible.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col justify-center">
+            <p class="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-emerald-600">Nuestra empresa</p>
+            <h3 class="section-title text-3xl font-black text-slate-900 sm:text-4xl">Atención profesional para clientes B2B.</h3>
+            <p class="mt-6 text-lg text-slate-600">
+              Más que un distribuidor, somos un socio operativo para negocios que requieren orden, velocidad y calidad en cada pedido.
+            </p>
+
+            <div class="mt-8 space-y-5">
+              <div class="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 3"/>
+                  </svg>
                 </div>
-
-                <!-- Producto 2 -->
-                <div class="bg-white p-4 rounded-xl shadow-sm border product-card">
-                    <div class="w-full h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center text-gray-400">
-                        [Imagen: Desinfectante Citríco]
-                    </div>
-                    <h4 class="font-bold text-lg">Citrus-Shield (10L)</h4>
-                    <p class="text-xs text-gray-500 mb-2">ID: SKU-4412</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <div>
-                            <p class="text-xl font-bold text-emerald-700">$480.00</p>
-                            <p class="text-[10px] text-gray-500">Stock disponible: 45 pzas</p>
-                        </div>
-                        <button onclick="addToCart('Citrus-Shield')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        </button>
-                    </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900">Productos confiables</h4>
+                  <p class="text-sm text-slate-600">Selección curada para mantener la operación limpia, segura y eficiente.</p>
                 </div>
+              </div>
 
-                <!-- Producto 3 -->
-                <div class="bg-white p-4 rounded-xl shadow-sm border product-card">
-                    <div class="w-full h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center text-gray-400">
-                        [Imagen: Kit Baños Eco]
-                    </div>
-                    <h4 class="font-bold text-lg">Kit Sanitario Hotelero</h4>
-                    <p class="text-xs text-gray-500 mb-2">ID: SKU-0012</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <div>
-                            <p class="text-xl font-bold text-emerald-700">$2,450.00</p>
-                            <p class="text-[10px] text-gray-500">Paquete 50 unidades</p>
-                        </div>
-                        <button onclick="addToCart('Kit Sanitario')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        </button>
-                    </div>
+              <div class="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3v18"/>
+                  </svg>
                 </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900">Cobertura regional</h4>
+                  <p class="text-sm text-slate-600">Apoyo a negocios en distintos puntos del estado con logística práctica y consistente.</p>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalogo" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="mb-2 text-sm font-bold uppercase tracking-[0.25em] text-emerald-600">Catálogo</p>
+            <h3 class="section-title text-3xl font-black text-slate-900 sm:text-4xl">Productos destacados</h3>
+          </div>
+          <div class="flex items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">
+            <span class="font-medium">Filtrar por:</span>
+            <select class="bg-transparent font-semibold text-slate-800 outline-none">
+              <option>Relevancia</option>
+              <option>Precio: menor a mayor</option>
+              <option>Más vendidos</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="catalog" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="product-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-slate-100 text-center text-sm font-medium text-slate-500">
+              Imagen: Detergente Bio 20L
+            </div>
+            <div class="mb-3 flex items-center justify-between">
+              <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-700">Eco</span>
+              <span class="text-xs text-slate-500">SKU-9921</span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900">Bio-Clean Pro</h4>
+            <p class="mt-2 text-sm text-slate-500">Detergente concentrado para limpieza profesional y alto rendimiento.</p>
+            <div class="mt-5 flex items-end justify-between gap-3">
+              <div>
+                <p class="text-sm text-slate-400 line-through">$1,200</p>
+                <p class="text-2xl font-black text-emerald-700">$950</p>
+              </div>
+              <button onclick="addToCart('Bio-Clean Pro')" class="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700">
+                Añadir
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-50 to-slate-100 text-center text-sm font-medium text-slate-500">
+              Imagen: Desinfectante Citríco
+            </div>
+            <div class="mb-3 flex items-center justify-between">
+              <span class="rounded-full bg-teal-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-teal-700">Nuevo</span>
+              <span class="text-xs text-slate-500">SKU-4412</span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900">Citrus-Shield</h4>
+            <p class="mt-2 text-sm text-slate-500">Desinfectante de alta potencia con aroma cítrico y acción efectiva.</p>
+            <div class="mt-5 flex items-end justify-between gap-3">
+              <div>
+                <p class="text-2xl font-black text-emerald-700">$480</p>
+                <p class="text-xs text-slate-500">Stock 45 piezas</p>
+              </div>
+              <button onclick="addToCart('Citrus-Shield')" class="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700">
+                Añadir
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-lime-50 to-slate-100 text-center text-sm font-medium text-slate-500">
+              Imagen: Kit Sanitario Hotelero
+            </div>
+            <div class="mb-3 flex items-center justify-between">
+              <span class="rounded-full bg-lime-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lime-700">Hotel</span>
+              <span class="text-xs text-slate-500">SKU-0012</span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900">Kit Sanitario Hotelero</h4>
+            <p class="mt-2 text-sm text-slate-500">Paquete integral ideal para mantenimiento estandarizado de huéspedes.</p>
+            <div class="mt-5 flex items-end justify-between gap-3">
+              <div>
+                <p class="text-2xl font-black text-emerald-700">$2,450</p>
+                <p class="text-xs text-slate-500">Paquete 50 unidades</p>
+              </div>
+              <button onclick="addToCart('Kit Sanitario')" class="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700">
+                Añadir
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="bg-slate-900 py-20 text-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <p class="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-emerald-400">Proceso</p>
+              <h3 class="section-title text-3xl font-black sm:text-4xl">Compras sencillas y confiables.</h3>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-lg font-black text-emerald-300">1</div>
+                <h4 class="text-xl font-bold">Explora</h4>
+                <p class="mt-3 text-sm leading-6 text-slate-300">Consulta productos, precios y disponibilidad en un solo lugar.</p>
+              </div>
+
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-lg font-black text-emerald-300">2</div>
+                <h4 class="text-xl font-bold">Cotiza</h4>
+                <p class="mt-3 text-sm leading-6 text-slate-300">Solicita la cantidad requerida y recibe asesoría comercial de inmediato.</p>
+              </div>
+
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-lg font-black text-emerald-300">3</div>
+                <h4 class="text-xl font-bold">Recibe</h4>
+                <p class="mt-3 text-sm leading-6 text-slate-300">Disfruta de entregas puntuales y atención continua para tu negocio.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="rounded-[2rem] bg-gradient-to-r from-emerald-600 to-teal-600 p-8 text-white shadow-2xl shadow-emerald-200 sm:p-12">
+          <div class="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p class="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-emerald-100">Contacto</p>
+              <h3 class="section-title text-3xl font-black sm:text-4xl">Listo para abastecer tu negocio.</h3>
+              <p class="mt-4 max-w-xl text-emerald-50/90">Solicita una cotización personalizada para tu hotel, restaurante, negocio o establecimiento en Chiapas.</p>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <a href="mailto:ventas@ecosuministros.com" class="rounded-full bg-white px-6 py-3 text-sm font-bold text-emerald-700 transition hover:bg-emerald-50">
+                ventas@ecosuministros.com
+              </a>
+              <a href="tel:+529611234567" class="rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                +52 (961) 123 4567
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- Modal Carrito -->
-    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl w-full max-w-md p-6">
-            <h3 class="text-2xl font-bold mb-4">Pedido Actual</h3>
-            <div id="cart-items" class="space-y-4 mb-6">
-                <p class="text-gray-500 italic text-center">El carrito está vacío</p>
-            </div>
-            <div class="flex gap-4">
-                <button onclick="toggleCart()" class="flex-1 border p-2 rounded-lg">Cerrar</button>
-                <button onclick="checkout()" class="flex-1 bg-emerald-600 text-white p-2 rounded-lg font-bold">Generar Orden</button>
-            </div>
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm text-slate-600 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <p>© 2026 EcoSuministros de Chiapas. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <a href="#inicio" class="hover:text-emerald-700">Inicio</a>
+          <a href="#catalogo" class="hover:text-emerald-700">Catálogo</a>
+          <a href="#contacto" class="hover:text-emerald-700">Contacto</a>
         </div>
+      </div>
+    </footer>
+
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 p-4">
+      <div class="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl">
+        <div class="mb-5 flex items-center justify-between">
+          <h3 class="text-2xl font-black text-slate-900">Pedido actual</h3>
+          <button onclick="toggleCart()" class="rounded-full border border-slate-200 p-2 text-slate-600 hover:bg-slate-50">✕</button>
+        </div>
+
+        <div id="cart-items" class="space-y-4">
+          <p class="py-8 text-center text-sm italic text-slate-500">Tu carrito está vacío.</p>
+        </div>
+
+        <div class="mt-6 rounded-2xl bg-slate-50 p-4">
+          <div class="flex items-center justify-between text-sm text-slate-600">
+            <span>Productos</span>
+            <span id="cart-total-items" class="font-bold text-slate-900">0</span>
+          </div>
+        </div>
+
+        <div class="mt-6 flex gap-3">
+          <button onclick="toggleCart()" class="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">
+            Seguir comprando
+          </button>
+          <button onclick="checkout()" class="flex-1 rounded-xl bg-emerald-600 px-4 py-3 text-sm font-bold text-white hover:bg-emerald-700">
+            Generar orden
+          </button>
+        </div>
+      </div>
     </div>
 
     <script>
-        let cart = [];
-        const cartCount = document.getElementById('cart-count');
-        const cartItems = document.getElementById('cart-items');
+      let cart = [];
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotalItems = document.getElementById('cart-total-items');
 
-        function addToCart(name) {
-            cart.push(name);
-            cartCount.innerText = cart.length;
-            updateCartUI();
+      function addToCart(name) {
+        cart.push(name);
+        cartCount.innerText = cart.length;
+        cartTotalItems.innerText = cart.length;
+        updateCartUI();
+        toggleCart();
+      }
+
+      function toggleCart() {
+        const modal = document.getElementById('cart-modal');
+        modal.classList.toggle('hidden');
+        modal.classList.toggle('flex');
+      }
+
+      function updateCartUI() {
+        if (cart.length === 0) {
+          cartItems.innerHTML = '<p class="py-8 text-center text-sm italic text-slate-500">Tu carrito está vacío.</p>';
+          cartCount.innerText = '0';
+          cartTotalItems.innerText = '0';
+          return;
         }
 
-        function toggleCart() {
-            document.getElementById('cart-modal').classList.toggle('hidden');
+        cartItems.innerHTML = cart.map((item, index) => `
+          <div class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-3">
+            <div>
+              <p class="font-bold text-slate-800">${item}</p>
+              <p class="text-xs text-slate-500">Cantidad: 1</p>
+            </div>
+            <button onclick="removeFromCart(${index})" class="text-xs font-bold text-red-500 hover:text-red-700">Quitar</button>
+          </div>
+        `).join('');
+        cartTotalItems.innerText = cart.length;
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        cartCount.innerText = cart.length;
+        cartTotalItems.innerText = cart.length;
+        updateCartUI();
+      }
+
+      function checkout() {
+        if (cart.length === 0) {
+          alert('Añade productos antes de generar la orden.');
+          return;
         }
 
-        function updateCartUI() {
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 italic text-center">El carrito está vacío</p>';
-                return;
-            }
-            cartItems.innerHTML = cart.map(item => `
-                <div class="flex justify-between border-b pb-2">
-                    <span>${item}</span>
-                    <span class="font-bold">1 pza</span>
-                </div>
-            `).join('');
-        }
-
-        function checkout() {
-            if(cart.length === 0) return alert("Añade productos primero");
-            alert("Orden enviada exitosamente. Se ha generado la factura electrónica y se cargó a su cuenta de crédito comercial.");
-            cart = [];
-            cartCount.innerText = "0";
-            updateCartUI();
-            toggleCart();
-        }
+        alert('Orden enviada exitosamente. Se ha generado la factura electrónica y se cargó a su cuenta de crédito comercial.');
+        cart = [];
+        cartCount.innerText = '0';
+        cartTotalItems.innerText = '0';
+        updateCartUI();
+        toggleCart();
+      }
     </script>
-</body>
+  </body>
 </html>
